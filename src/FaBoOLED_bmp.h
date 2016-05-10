@@ -1,4 +1,15 @@
-// Bitmap 128x64
+/**
+ @file FaBoOLED_bmp.h
+ @brief This is a library for the FaBo OLED I2C Brick.
+
+   http://fabo.io/214.html
+
+   Released under APACHE LICENSE, VERSION 2.0
+
+   http://www.apache.org/licenses/
+
+ @author FaBo<info@fabo.io>
+*/
 
 #ifndef FABOOLED_BMP_H
 #define FABOOLED_BMP_H

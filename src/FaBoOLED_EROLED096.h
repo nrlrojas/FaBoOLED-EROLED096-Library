@@ -1,3 +1,15 @@
+/**
+ @file FaBoOLED_EROLED096.h
+ @brief This is a library for the FaBo OLED I2C Brick.
+
+   http://fabo.io/214.html
+
+   Released under APACHE LICENSE, VERSION 2.0
+
+   http://www.apache.org/licenses/
+
+ @author FaBo<info@fabo.io>
+*/
 
 #ifndef FABOOLED_EROLED096_H
 #define FABOOLED_EROLED096_H
@@ -11,6 +23,10 @@
 
 #define EROLED096_SLAVE_ADDRESS 0x3C ///< ER-OLED0.96 I2C Slave Address
 
+/**
+ @class FaBoOLED_EROLED096
+ @brief FaBo OLED I2C Controll class
+*/
 class FaBoOLED_EROLED096 : public Print {
   public:
     FaBoOLED_EROLED096(uint8_t addr = EROLED096_SLAVE_ADDRESS);

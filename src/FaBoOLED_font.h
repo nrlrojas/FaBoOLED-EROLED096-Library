@@ -1,4 +1,15 @@
-// Font 5x7
+/**
+ @file FaBoOLED_font.h
+ @brief This is a library for the FaBo OLED I2C Brick.
+
+   http://fabo.io/214.html
+
+   Released under APACHE LICENSE, VERSION 2.0
+
+   http://www.apache.org/licenses/
+
+ @author FaBo<info@fabo.io>
+*/
 
 #ifndef FABOOLED_FONT_H
 #define FABOOLED_FONT_H

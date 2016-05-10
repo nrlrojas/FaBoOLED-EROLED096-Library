@@ -1,6 +1,21 @@
+/**
+ @file FaBoOLED_EROLED096.cpp
+ @brief This is a library for the FaBo OLED I2C Brick.
+
+   http://fabo.io/214.html
+
+   Released under APACHE LICENSE, VERSION 2.0
+
+   http://www.apache.org/licenses/
+
+ @author FaBo<info@fabo.io>
+*/
 
 #include "FaBoOLED_EROLED096.h"
 
+/**
+ @brief Constructor
+*/
 FaBoOLED_EROLED096::FaBoOLED_EROLED096(uint8_t addr) {
   _i2caddr = addr;
   _cur_x = 120;
@@ -8,6 +23,9 @@ FaBoOLED_EROLED096::FaBoOLED_EROLED096(uint8_t addr) {
   Wire.begin();
 }
 
+/**
+ @brief Initialize
+*/
 void FaBoOLED_EROLED096::init() {
   // Initializing
   setCommand(0xAE); // set display off
@@ -36,11 +54,17 @@ void FaBoOLED_EROLED096::init() {
   setCommand(0xAF); // set display on
 }
 
+/**
+ @brief Begin Device
+*/
 void FaBoOLED_EROLED096::begin() {
   init();
   clear();
 }
 
+/**
+ @brief Show Bitmap
+*/
 void FaBoOLED_EROLED096::showBitmap() {
   uint8_t i,j;
   for(i=0; i<8; i++){ // row/height/page
@@ -51,6 +75,9 @@ void FaBoOLED_EROLED096::showBitmap() {
   }
 }
 
+/**
+ @brief Clear Screen
+*/
 void FaBoOLED_EROLED096::clear(void) {
   uint8_t i,j;
   for(i=0; i<8; i++){ // row/height/page
@@ -62,11 +89,17 @@ void FaBoOLED_EROLED096::clear(void) {
   home();
 }
 
+/**
+ @brief Set Cursor to Home
+*/
 void FaBoOLED_EROLED096::home(void) {
   _cur_x = 120;
   _cur_y = 7;
 }
 
+/**
+ @brief Set Cursor
+*/
 void FaBoOLED_EROLED096::setCursor(uint8_t col, uint8_t row) {
   uint8_t map_x[]={120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,0};
   uint8_t map_y[]={7,6,5,4,3,2,1,0};
@@ -78,10 +111,16 @@ void FaBoOLED_EROLED096::setCursor(uint8_t col, uint8_t row) {
   }
 }
 
+/**
+ @brief Set Command
+*/
 void FaBoOLED_EROLED096::setCommand(uint8_t value) {
   send(value, (uint8_t)0x00);
 }
 
+/**
+ @brief Set Address
+*/
 void FaBoOLED_EROLED096::setAddress(uint8_t row, uint8_t col_s, uint8_t col_e) {
   Wire.beginTransmission(_i2caddr);
   Wire.write(0x00); // command
@@ -92,10 +131,16 @@ void FaBoOLED_EROLED096::setAddress(uint8_t row, uint8_t col_s, uint8_t col_e) {
   Wire.endTransmission();
 }
 
+/**
+ @brief Write Display Data
+*/
 void FaBoOLED_EROLED096::writeData(uint8_t value) {
   send(value, (uint8_t)0x40);
 }
 
+/**
+ @brief Write character
+*/
 size_t FaBoOLED_EROLED096::write(uint8_t value) {
   uint8_t i;
   if ( value>=0x20 && value<=0x80 ) {
@@ -115,6 +160,9 @@ size_t FaBoOLED_EROLED096::write(uint8_t value) {
   return 1;
 }
 
+/**
+ @brief Send I2C Data
+*/
 void FaBoOLED_EROLED096::send(uint8_t value, uint8_t mode) {
   Wire.beginTransmission(_i2caddr);
   Wire.write(mode); // control byte: Data/Command
